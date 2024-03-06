@@ -1,4 +1,4 @@
-## Cloud Computing ☁️
+## Cloud Computing
 Cloud computing is like renting computer resources (like storage space, processing power, and software) over the internet instead of buying and managing them yourself.
 
 <img src="../assets/cloud.png" alt="SSH" width="400px">
