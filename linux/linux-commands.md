@@ -96,7 +96,7 @@ Variables are values stored in memory and managed by the operating system.
 - When creating a variable, they must be in CAPITALS.
 - To create a variable in the terminal, use the syntax `VARIABLE_NAME=value`.
 - To print out the variable, use the syntax `printenv VARIABLE_NAME` where output should be `value`.
-  <img src="../assets/img7.png" alt="SSH">
+  <img src="../assets/img7.png" alt="SSH" width="300px">
 
 
 #### Local Variables
