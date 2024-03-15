@@ -14,7 +14,7 @@ Application of the previously created image:
     ```
     #!/bin/bash
     cd tech257_sparta_app/app
-    pm2 stop app.js
+    pm2 stop all
     pm2 start app.js
     ```
 
