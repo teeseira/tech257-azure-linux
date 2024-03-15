@@ -1,2 +1,8 @@
 .idea/
 *.idea/
+*hide/
+*./hide/
+*/hide/
+
+*README.md
+*./README.md
