@@ -64,3 +64,120 @@ Note: the threshold is low enough that the CPU utilisation will trigger an alert
 - Wait for the alert condition to be met (e.g., CPU usage exceeds the threshold).
 - Check your email inbox for the notification sent by Azure Alert.
 
+## Creating an An Azure VM Scale Set
+
+### Create VM Scale set
+
+- Search in Azure Portal:
+  
+  <img src="../assets/image-3.png" width=500>
+
+- `+ Create`:
+
+  **Basics:**
+
+  -   Specify your Subscription, Resources and give it a name.
+  -   For Availability zone, select Zones 1-3 to ensure high availability.
+  -   Select "Uniform" for orchestration mode to ensure identical instances.
+  -   Select autoscaling and image:
+
+      <img src="../assets/image-14.png" width=600>
+
+        #### Scaling configuration
+        - Instance count - default: 2, min: 2, max: 3 
+        - CPU Threshold - 75% (scale out), 25% (scale in)
+        - Duration in minutes: 10
+
+
+  - Choose the instance size: **B1s**
+  - Enter username and use existing SSH key.
+  - License type: Other.
+
+  **Disks:**
+
+    <img src="../assets/image-7.png" width=600>
+
+  #### Networking:
+  - Give name for Virtual network.
+  - Give name for Network interface > choose Public subnet > NSG remains basic > Inboud ports: 80 (HTTP) and 22 (SSH).
+  - Create and name a load balancer.
+  
+    <img src="../assets/image-11.png" width=600>
+
+  **Health:**
+  
+    <img src="../assets/image-15.png" width=700>
+
+    <img src="../assets/image-16.png" width=700>
+
+  **Advanced:**
+  
+  For user data input:
+
+  ```
+  #!/bin/bash
+  cd tech257_sparta_app/app/
+  pm2 stop all
+  pm2 start app.js
+  ```
+  **Add Tags**
+
+  **Then click `Create`.**
+
+  ### Results
+
+  - Now 'Go to resource' the the scale set resources > Click Instances and you will see 2 instances:
+
+    <img src="../assets/image-18.png" width=700>
+
+    Public IP address for load balancer:
+
+    <img src="../assets/image-19.png" width=700>
+
+    <img src="../assets/image-20.png" width=500>
+
+### Put to the test
+
+
+- [1] Stop then start both instances:
+
+  <img src="../assets/image-21.png" width=700>
+
+  <img src="../assets/image-22.png" width=700>
+
+  *When both are unhealthy the app won't work.*
+
+- [2] Reimage one of the instances:
+
+  <img src="../assets/image-23.png" width=700>
+
+  *When at least one instance works, the app still runs.*
+
+- [3] Auto-scaling loads a new one after 10 mins:
+
+  <img src="../assets/image-24.png" width=700>
+
+
+### SSH into them on the terminal
+
+Example Private Key Path: `ssh -i ~/.ssh/yourkey azureuser@4.159.37.42` where you should replace *4.159.37.42* with your own load balancer Public IP.
+
+- SSH into VM by passing in port 50000 to see pm2 running:
+  ```
+  ssh -i ~/.ssh/yourkey -p 50000 azureuser@4.159.37.42
+  ps aux
+  ```
+
+- SSH into VM by passing in port 50001 to see pm2 not running:
+  ```
+  ssh -i ~/.ssh/yourkey -p 50001 azureuser@4.159.37.42
+  ps aux
+  ```
+
+### Delete resources
+
+Delete in this order:
+- Scale set (apply force)
+- Load balancer
+- Load balancer Public IP
+- Network security group

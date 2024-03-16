@@ -215,7 +215,7 @@ At this stage you should be SSH'd into the VM in the terminal.
 - Navigate into the 'app' folder and install  dependencies: 
    ```
    cd tech257_sparta_app/app
-   pm install
+   npm install
    ```
 
 - Navigate to the 'app' directory and start the application with `npm start` or `node app.js`.
@@ -359,6 +359,10 @@ pm2 start app.js
   <img src="../assets/img21.png">
 
 This also worked on a fresh Virtual Machine!
+
+*Key takeaway: With the introduction of the new image and concise user data, the need for the security group to allow inbound traffic for port 3000 is not needed. This is due to the configuration of the Nginx file, which facilitates traffic between port 80 (HHTP) and port 3000 (the app). As a result, accessing the Public IP without specifying port 3000 redirects to port 80, which is managed by Nginx (the web server). Nginx then seamlessly forwards requests to the application via port 3000.*
+
+<img src="../assets/nginx.png" width=500>
 
 ## Next level of Automation: User Data and Image
 
