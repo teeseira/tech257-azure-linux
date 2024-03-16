@@ -5,5 +5,5 @@
 - [Azure Basics](/azure/azure-basics.md)
 - [Azure Pratical](/azure/azure-practical.md) 
 - [Azure User Data Condensed](/azure/user-data-condensed.md)
-- [Azure Blob Storage](/azure/azure-blob-storage) 
-- [Azure Autoscaling](/azure/azure-autoscaling) 
+- [Azure Blob Storage](/azure/azure-blob-storage.md) 
+- [Azure Autoscaling](/azure/azure-autoscaling.md)
