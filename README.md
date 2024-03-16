@@ -1,4 +1,4 @@
-# Contents:
+# Linux and Azure
 - [Linux Commands](/linux/linux-commands.md)
 - [Linux Permissions](/linux/linux-permissions.md)
 - [Cloud Fundamentals](/azure/cloud-fundamentals.md)
