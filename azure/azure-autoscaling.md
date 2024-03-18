@@ -64,7 +64,7 @@ Note: the threshold is low enough that the CPU utilisation will trigger an alert
 - Wait for the alert condition to be met (e.g., CPU usage exceeds the threshold).
 - Check your email inbox for the notification sent by Azure Alert.
 
-## Creating an An Azure VM Scale Set
+## Creating an Azure VM Scale Set
 
 ### Create VM Scale set
 
