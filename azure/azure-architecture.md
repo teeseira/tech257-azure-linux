@@ -1,4 +1,7 @@
-# Database Privacy in Two-Tier Deployment
+# Three Subnet Architecture
+The Three Subnet Architecture is a network design approach where a large network is divided into three subnets.
+
+<img src="../assets/diagram.png" alt="Database Privacy in Two-Tier Deployment" width=500px>
 
 ### [1] Create Virtual Network
    - Desired name:
@@ -30,9 +33,9 @@ Using the ready-made image, create a virtual machine for the database and have i
 
 #### Networking
 
-<br><img src="../assets/img70.png" width=600px>
+<img src="../assets/img70.png" width=600px>
 
-> Ensure that there is no Public IP for the database virtual machine. *** Instead we will obtain the private IP address of the database as an environment variable when create the VM for the application.
+> Ensure that there is no Public IP for the database virtual machine.
 
   - Add Tags and Create.
   
@@ -129,7 +132,7 @@ Using the ready-made image, create a virtual machine for the database and have i
 Set up a link of communication between the app and the database so that we can keep track of what is going on.  
 
 - In a command prompt terminal, use SSH into your App VM.
-- Run the ping command using your private IP of the databse: `ping 10.0.4.4`
+- Run the ping command using your private IP of the database: `ping 10.0.4.4`
 Need DB private IP:
     <br><img src="../assets/img54.png" width=600px>
     <br>This sends a little packet of information from the app to the databse to check they can communicate.
@@ -150,10 +153,9 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
 - Enter the following, then click `Add`.
   <br><img src="../assets/img56.png" width=500px>
 
-
 #### Associate the Route Table with the public subnet
 
-- Go to `Subnets` on the LHS navigation bar of Route Table resource > click `Associate` > 
+- Go to `Subnets` on the LHS navigation bar of Route Table resource > click `Associate`.
 - Enter the following, then click `OK`.
   <br><img src="../assets/img57.png" width=500px>
 
@@ -163,7 +165,7 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
   This also stopped the ping connection that was SSH's into on the App VM:
   <br><img src="../assets/img59.png" width=500px>
 
-#### Enable IP forwarding on two places...
+### [8] Enable IP forwarding on two places...
 
 (a) ... on Azure with NIC
 
@@ -183,6 +185,7 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
 
 - Save and Close: `Ctrl + S` > `Ctrl + X`
 
+#### After enabling IP forwarding:
 - Reload the configuration file to apply IP forwarding: `sudo sysctl -p`
   <br><img src="../assets/img64.png" width=600px>
     
@@ -192,7 +195,7 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
     Website is working again:
     <img src="../assets/img67.png" width=600px>
 
-### [8] Create IP tables using script
+### [9] Create IP tables using script
 
 - In the NVA VM, create a new script in your home directory: `nano config-ip-tables.sh`
 
@@ -256,9 +259,9 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
 
 - Run script to make IP rules persistent to survive a reboot: `./config-ip-tables.sh`
 
-  <br><img src="../assets/img71.png" width=600px>
+  <img src="../assets/img71.png" width=600px>
 
 ### Delete Resources
+Delete resources to tear down the architecture.
 
 <img src="../assets/img72.png" width=600px>
-

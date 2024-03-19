@@ -447,7 +447,6 @@ The prerequisite here is having [Azure CLI](https://learn.microsoft.com/en-us/cl
   
   <img src="../assets/img28.png">
 
-
 Key takeaway: User data is sometimes only needed in shorter form. This is the case when an image already contains the desired configuration and software setup. When you create an image of a VM, you capture its entire state, including the operating system, installed software, and configuration settings. So shorter user data is needed because some things are already applied in the iamge.
 
 ## Two-Tier Application
@@ -510,12 +509,13 @@ Databases are used to store and retrieve data quickly. MongoDB is a type of data
   sudo -E npm install
   sudo -E npm start -->
   
-  ### Results
+### Results
+
 Result of the two-tier application after passing in the below in app's user data:
 
   ```
-    # Export Database Private IP address
-    export DB_HOST="mongodb://10.0.3.4:27017/posts"
+  # Export Database Private IP address
+  export DB_HOST="mongodb://10.0.3.4:27017/posts"
   ```
 <img src="../assets/img30.png" alt="pic" >
 <img src="../assets/img31.png" alt="pic" >
@@ -525,13 +525,45 @@ Result of the two-tier application after passing in the below in app's user data
   
   <img src="../assets/img32.png" alt="pic" >
 
-## Add blob image to the Sparta test app
+## Add Blob Image to the Application
 
-Prerequisities:
-- Create fresh app VM with user data
-- Stop app running first
-- Install Azure CLI
-  
-- SSH into the fresh app VM to run scripts.
-  - Script to create a storage account, container and upload cat image blob, make the blob public, modify the homepage index file to use the new blob, then run the app:
-  - cript to change everything back to the way it was on the home page and re-run the app, then delete the storage account:
+`./use-blob.sh`
+
+Script to download image from the internet to blob storage: 
+```
+#!/bin/bash
+
+az storage account create --name tech257tidistorage --resource-group tech257 --location uksouth --sku Standard_LRS
+
+az storage container create --account-name tech257tidistorage --name mycontainer --auth-mode login
+
+curl -o cat.jpg https://upload.wikimedia.org/wikipedia/commons/7/74/A-Cat.jpg
+
+az storage blob upload --account-name tech257tidistorage --container-name mycontainer --name azurecat.jpg --file cat.jpg --auth-mode login
+
+if [ ! -f /tech257_sparta_app/app/views/index2.ejs ]; then
+    sudo cp /tech257_sparta_app/app/views/index.ejs /tech257_sparta_app/app/views/index2.ejs
+fi
+
+BLOB_URL=$(az storage blob url --account-name tech257tidistorage --container-name mycontainer --name azurecat.jpg --auth-mode login)
+
+sudo sed -i "27s|<h2>The app is running correctly.</h2>|& <img src=$BLOB_URL>|" /tech257_sparta_app/app/views/index.ejs
+
+az storage account update --name tech257tidistorage --allow-blob-public-access true
+
+sleep 15
+
+az storage container set-permission --account-name tech257tidistorage --name mycontainer --public-access blob
+```
+
+> The script creates a storage account, container and uploads cat image blob, makes the blob public, modifies the homepage index file to use the new blob, then runs the app.
+
+Results:
+
+<img src="../assets/img33.png">
+<img src="../assets/img34.png">
+
+<!-- ### Script to remove the storage account: 
+`./revert.sh` 
+Script to change everything back to the way it was on the home page and re-run the app, then delete the storage account.
+-->

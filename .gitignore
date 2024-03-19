@@ -3,3 +3,8 @@
 *hide/
 *./hide/
 */hide/
+
+.DS_Store
+/.DS_Store
+*.DS_Store
+*/.DS_Store
