@@ -1,7 +1,10 @@
-# Three Subnet Architecture
-The Three Subnet Architecture is a network design approach where a large network is divided into three subnets.
+# Private Database in a Two-Tier App Deployment
 
 <img src="../assets/diagram.png" alt="Database Privacy in Two-Tier Deployment" width=500px>
+
+The Three Subnet Architecture is a network design approach where a large network is divided into three subnets.
+
+In a Two-Tier App Deployment, the Three Subnet Architecture can be used to improve the security and efficiency of the system, especially when dealing with a private database. 
 
 ### [1] Create Virtual Network
    - Desired name:
@@ -261,7 +264,7 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
 
   <img src="../assets/img71.png" width=600px>
 
-### Delete Resources
+### [10] Delete Resources
 Delete resources to tear down the architecture.
 
 <img src="../assets/img72.png" width=400px>
