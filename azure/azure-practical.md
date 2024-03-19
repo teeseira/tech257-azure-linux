@@ -428,9 +428,11 @@ The prerequisite here is having [Azure CLI](https://learn.microsoft.com/en-us/cl
 - User data scripts are executed only once during VM initialisation. You can include commands in the user data script to automate tasks, such as installing applications or configuring settings, so that the VM is ready for use without manual intervention.
 - Images are pre-configured templates that serve as the basis for creating VM instances. They contain the operating system and potentially other software configurations. Once you create a VM from an image, you can use that VM multiple times, and each instance will have the same starting configuration as defined by the image.
 
-### Automate app deployment using image just created and a little bit of user data
+### Automate app deployment using image just created and short user data
 
 - Create a VM, using image just created and with the following as user data:
+  
+  <img src="../assets/img29.png">
   
   ```
   #!/bin/bash
@@ -442,7 +444,7 @@ The prerequisite here is having [Azure CLI](https://learn.microsoft.com/en-us/cl
   pm2 stop all
   pm2 start app.js
   ```
-  <img src="../assets/img29.png">
+  
 - Public IP address now works from my new image and short user data:
   
   <img src="../assets/img28.png">

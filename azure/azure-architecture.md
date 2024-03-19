@@ -264,4 +264,4 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
 ### Delete Resources
 Delete resources to tear down the architecture.
 
-<img src="../assets/img72.png" width=600px>
+<img src="../assets/img72.png" width=400px>
