@@ -92,7 +92,7 @@ Using a ready-made image, create a virtual machine for the database and have it 
 
 <img src="../assets/img67.png" width=600px>
 
-### [5] Create Network Virtual Appliance using blank image
+### [4] Create Network Virtual Appliance using blank image
 
 #### Basics
 
