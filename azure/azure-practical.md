@@ -254,7 +254,7 @@ You can use PM2 (a process manager) to start your app in the background, as a ba
 
   <img src="../assets/img17.png">
 
-## Automate Deployment of App on Azure (with Bash Script)
+## Automated Deployment of App on Azure (with Bash Script)
 
 - Create a bash script, with modified permissions and run it:
 
@@ -428,7 +428,7 @@ The prerequisite here is having [Azure CLI](https://learn.microsoft.com/en-us/cl
 - User data scripts are executed only once during VM initialisation. You can include commands in the user data script to automate tasks, such as installing applications or configuring settings, so that the VM is ready for use without manual intervention.
 - Images are pre-configured templates that serve as the basis for creating VM instances. They contain the operating system and potentially other software configurations. Once you create a VM from an image, you can use that VM multiple times, and each instance will have the same starting configuration as defined by the image.
 
-### Automate app deployment using image just created and short user data
+### Automate app deployment using image and shorter user data
 
 - Create a VM, using image just created and with the following as user data:
   
@@ -451,7 +451,7 @@ The prerequisite here is having [Azure CLI](https://learn.microsoft.com/en-us/cl
 
 Key takeaway: User data is sometimes only needed in shorter form. This is the case when an image already contains the desired configuration and software setup. When you create an image of a VM, you capture its entire state, including the operating system, installed software, and configuration settings. So shorter user data is needed because some things are already applied in the iamge.
 
-## Two-Tier Application
+## Two-Tier Deployment
 
 A two-tier application is a type of software system that consists of two main parts or layers:
 

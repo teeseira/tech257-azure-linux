@@ -6,6 +6,12 @@ The Three Subnet Architecture is a network design approach where a large network
 
 In a Two-Tier App Deployment, the Three Subnet Architecture can be used to improve the security and efficiency of the system, especially when dealing with a private database. 
 
+<!--### Desired outcome
+
+<img src="../assets/img52b.png" width=600px><br>
+<img src="../assets/img51.png" width=600px><br>
+<img src="../assets/img52.png" width=600px>-->
+
 ### [1] Create Virtual Network
    - Desired name:
     <br><img src="../assets/img49.png" width=500px>
@@ -18,12 +24,10 @@ In a Two-Tier App Deployment, the Three Subnet Architecture can be used to impro
 
   - Add Tags and Create.
 
-### [2] Ready-made image
+### [2] Create Virtual Machine for Database
+<!-- Make a read-made image: Create a VM for the database in order to create an image out of it. Otherwise use a ready-made image that serves this purpose.-->
 
-Create a VM for the database in order to create an image out of it. Otherwise use a ready-made image that serves this purpose.
-
-### [3] Create Virtual Machine for Database
-Using the ready-made image, create a virtual machine for the database and have it running.
+Using a ready-made image, create a virtual machine for the database and have it running.
 
 #### Basics
 <img src="../assets/img43.png" width=600px>
@@ -40,9 +44,10 @@ Using the ready-made image, create a virtual machine for the database and have i
 
 > Ensure that there is no Public IP for the database virtual machine.
 
-  - Add Tags and Create.
-  
-### [4] Create Virtual Machine for Application
+#### Add Tags and Create:
+<img src="../assets/img52b.png" width=600px>
+
+### [3] Create Virtual Machine for Application
 
 #### Basics
 
@@ -78,7 +83,8 @@ Using the ready-made image, create a virtual machine for the database and have i
 
 > Note: 10.0.4.4:27017 is the Database Private IP address.
 
-  - Add Tags and Create.
+#### Add Tags and Create:
+<img src="../assets/img51.png" width=600px>
 
 #### Results
 
@@ -118,19 +124,10 @@ Using the ready-made image, create a virtual machine for the database and have i
     ```
     <img src="../assets/img50.png" width=600px>
 
-### Summary of Virtual Machines created
-
-#### Database VM:
-<img src="../assets/img52b.png" width=600px>
-
-#### App VM:
-<img src="../assets/img51.png" width=600px>
-
-#### NVA VM (Network Virtual Applicance VM):
+#### Add Tags and Create:
 <img src="../assets/img52.png" width=600px>
 
-
-### [6] Test communication between app and database
+### [5] Test communication between app and database
 
 Set up a link of communication between the app and the database so that we can keep track of what is going on.  
 
@@ -140,7 +137,7 @@ Need DB private IP:
     <br><img src="../assets/img54.png" width=600px>
     <br>This sends a little packet of information from the app to the databse to check they can communicate.
 
-### [7] Set up user routing 
+### [6] Set up user routing 
 Set up the user routing from pubic subnet, through dmz subnet to private subnet.
 
 #### Create Route Table
@@ -168,7 +165,7 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
   This also stopped the ping connection that was SSH's into on the App VM:
   <br><img src="../assets/img59.png" width=500px>
 
-### [8] Enable IP forwarding on two places...
+### [7] Enable IP forwarding on two places...
 
 (a) ... on Azure with NIC
 
@@ -196,9 +193,9 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
   <br><img src="../assets/img65.png" width=500px>
 
     Website is working again:
-    <img src="../assets/img67.png" width=600px>
+  <br><img src="../assets/img67.png" width=600px>
 
-### [9] Create IP tables using script
+### [8] Create IP tables using script
 
 - In the NVA VM, create a new script in your home directory: `nano config-ip-tables.sh`
 
@@ -264,7 +261,7 @@ Set up the user routing from pubic subnet, through dmz subnet to private subnet.
 
   <img src="../assets/img71.png" width=600px>
 
-### [10] Delete Resources
+### Delete Resources
 Delete resources to tear down the architecture.
 
 <img src="../assets/img72.png" width=400px>
